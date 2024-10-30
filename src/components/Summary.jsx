@@ -23,7 +23,7 @@ const Summary = ({ loads, monthsPerYear, solarProduction }) => {
 
   const totalAnnualKwh = calculateTotalKwh();
   const monthlyAverage = totalAnnualKwh / 12;
-  const solarOffset = solarProduction ? (totalAnnualKwh / Number(solarProduction)) * 100 : 0;
+  const solarOffset = solarProduction ? (Number(solarProduction) / totalAnnualKwh) * 100 : 0;
 
   return (
     <Paper 
