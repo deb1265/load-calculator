@@ -31,6 +31,35 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
     }
   };
 
+  const textFieldSx = {
+    bgcolor: 'white',
+    borderRadius: 1,
+    '& .MuiOutlinedInput-root': {
+      borderRadius: 1,
+      '& input': {
+        paddingLeft: '12px'
+      }
+    },
+    '& .MuiInputLabel-root': {
+      backgroundColor: 'white',
+      padding: '0 4px',
+      marginLeft: '36px'
+    },
+    '& .MuiInputLabel-shrink': {
+      marginLeft: 0,
+      backgroundColor: 'white'
+    }
+  };
+
+  const disabledTextFieldSx = {
+    ...textFieldSx,
+    bgcolor: 'rgba(255,255,255,0.9)',
+    '& .MuiInputBase-input.Mui-disabled': {
+      WebkitTextFillColor: '#000000',
+      opacity: 0.8
+    }
+  };
+
   return (
     <Box>
       {/* Solar Production Section */}
@@ -61,13 +90,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
               InputProps={{
                 inputProps: { min: 0 }
               }}
-              sx={{ 
-                bgcolor: 'white', 
-                borderRadius: 1,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={textFieldSx}
             />
           </Grid>
         </Grid>
@@ -104,13 +127,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
                   </InputAdornment>
                 ),
               }}
-              sx={{ 
-                bgcolor: 'white', 
-                borderRadius: 1,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={textFieldSx}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -126,13 +143,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
                   </InputAdornment>
                 ),
               }}
-              sx={{ 
-                bgcolor: 'white', 
-                borderRadius: 1,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={textFieldSx}
             />
           </Grid>
           <Grid item xs={12}>
@@ -148,13 +159,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
                   </InputAdornment>
                 ),
               }}
-              sx={{ 
-                bgcolor: 'white', 
-                borderRadius: 1,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={textFieldSx}
             />
           </Grid>
           <Grid item xs={12}>
@@ -170,13 +175,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
                   </InputAdornment>
                 ),
               }}
-              sx={{ 
-                bgcolor: 'white', 
-                borderRadius: 1,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={textFieldSx}
             />
           </Grid>
           <Grid item xs={12}>
@@ -192,13 +191,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
                   </InputAdornment>
                 ),
               }}
-              sx={{ 
-                bgcolor: 'white', 
-                borderRadius: 1,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={textFieldSx}
             />
           </Grid>
         </Grid>
@@ -234,17 +227,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
                   </InputAdornment>
                 ),
               }}
-              sx={{ 
-                bgcolor: 'rgba(255,255,255,0.9)', 
-                borderRadius: 1,
-                '& .MuiInputBase-input.Mui-disabled': {
-                  WebkitTextFillColor: '#000000',
-                  opacity: 0.8
-                },
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={disabledTextFieldSx}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -260,13 +243,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
                   </InputAdornment>
                 ),
               }}
-              sx={{ 
-                bgcolor: 'white', 
-                borderRadius: 1,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={textFieldSx}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -282,13 +259,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
                   </InputAdornment>
                 ),
               }}
-              sx={{ 
-                bgcolor: 'white', 
-                borderRadius: 1,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={textFieldSx}
             />
           </Grid>
           <Grid item xs={12}>
@@ -304,17 +275,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
                   </InputAdornment>
                 ),
               }}
-              sx={{ 
-                bgcolor: 'rgba(255,255,255,0.9)', 
-                borderRadius: 1,
-                '& .MuiInputBase-input.Mui-disabled': {
-                  WebkitTextFillColor: '#000000',
-                  opacity: 0.8
-                },
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={disabledTextFieldSx}
             />
           </Grid>
           <Grid item xs={12}>
@@ -330,17 +291,7 @@ const CustomerInfo = ({ data, onChange, solarProduction, onSolarProductionChange
                   </InputAdornment>
                 ),
               }}
-              sx={{ 
-                bgcolor: 'rgba(255,255,255,0.9)', 
-                borderRadius: 1,
-                '& .MuiInputBase-input.Mui-disabled': {
-                  WebkitTextFillColor: '#000000',
-                  opacity: 0.8
-                },
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 1
-                }
-              }}
+              sx={disabledTextFieldSx}
             />
           </Grid>
         </Grid>

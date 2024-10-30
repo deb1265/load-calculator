@@ -15,7 +15,8 @@ import {
   FormControl,
   InputLabel,
   useTheme,
-  useMediaQuery
+  useMediaQuery,
+  InputAdornment
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import InfoIcon from '@mui/icons-material/Info';
@@ -54,6 +55,33 @@ const LoadCategories = ({ loads, onChange }) => {
       [`${category}-${item}`]: value
     }));
     onChange(category, item, loads[category]?.[item] || 0, value);
+  };
+
+  const handleEVInputChange = (category, item, field, value) => {
+    const numValue = parseFloat(value);
+    const newErrors = { ...errors };
+    
+    if (isNaN(numValue) || numValue < 0) {
+      newErrors[`${category}-${item}-${field}`] = 'Please enter a valid positive number';
+    } else {
+      delete newErrors[`${category}-${item}-${field}`];
+    }
+    
+    setErrors(newErrors);
+    
+    // Calculate annual kWh based on kWh/mile and annual miles
+    if (!newErrors[`${category}-${item}-${field}`]) {
+      const itemData = loadData[category][item];
+      const currentValues = loads[category]?.[item] || {};
+      const updatedValues = {
+        ...currentValues,
+        [field]: numValue,
+        annualKwh: field === 'kwhPerMile' ? 
+          numValue * (currentValues.annualMiles || itemData.annualMiles) :
+          (currentValues.kwhPerMile || itemData.kwhPerMile) * numValue
+      };
+      onChange(category, item, updatedValues);
+    }
   };
 
   return (
@@ -97,6 +125,46 @@ const LoadCategories = ({ loads, onChange }) => {
                 const errorKey = `${category}-${item}`;
                 const monthsKey = `${category}-${item}`;
                 const currentMonths = monthsPerYear[monthsKey] || details.monthsPerYear;
+
+                if (details.isEVCharger) {
+                  const values = loads[category]?.[item] || {};
+                  return (
+                    <Grid item xs={12} key={item}>
+                      <Paper elevation={0} sx={{ p: 2, bgcolor: 'grey.50', borderRadius: 2 }}>
+                        <Typography sx={{ mb: 2 }}>{item}</Typography>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12} sm={6}>
+                            <TextField
+                              fullWidth
+                              label="kWh per mile"
+                              value={values.kwhPerMile || details.kwhPerMile}
+                              onChange={(e) => handleEVInputChange(category, item, 'kwhPerMile', e.target.value)}
+                              type="number"
+                              InputProps={{
+                                endAdornment: <InputAdornment position="end">kWh/mile</InputAdornment>
+                              }}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6}>
+                            <TextField
+                              fullWidth
+                              label="Annual miles"
+                              value={values.annualMiles || details.annualMiles}
+                              onChange={(e) => handleEVInputChange(category, item, 'annualMiles', e.target.value)}
+                              type="number"
+                              InputProps={{
+                                endAdornment: <InputAdornment position="end">miles/year</InputAdornment>
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                        <Typography sx={{ mt: 2, textAlign: 'right' }}>
+                          Annual Consumption: {values.annualKwh?.toFixed(2) || '0'} kWh/yr
+                        </Typography>
+                      </Paper>
+                    </Grid>
+                  );
+                }
 
                 return (
                   <Grid item xs={12} key={item}>

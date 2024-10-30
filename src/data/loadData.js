@@ -285,5 +285,15 @@ export const loadData = {
       monthsPerYear: 3.5,
       description: '5 ton air conditioning unit'
     }
+  },
+  'Electric Vehicle': {
+    'EV Charger': {
+      monthlyKwh: 0,
+      monthsPerYear: 12,
+      description: 'Electric Vehicle Charging Station',
+      isEVCharger: true,
+      kwhPerMile: 0.3,
+      annualMiles: 12000
+    }
   }
 };

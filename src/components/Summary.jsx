@@ -6,11 +6,15 @@ const Summary = ({ loads, monthsPerYear, solarProduction }) => {
   const calculateTotalKwh = () => {
     let total = 0;
     Object.entries(loads).forEach(([category, items]) => {
-      Object.entries(items).forEach(([item, quantity]) => {
+      Object.entries(items).forEach(([item, value]) => {
         const itemData = loadData[category]?.[item];
-        const months = monthsPerYear[`${category}-${item}`] || itemData.monthsPerYear;
         if (itemData) {
-          total += (itemData.monthlyKwh * months * Number(quantity));
+          if (itemData.isEVCharger) {
+            total += value.annualKwh || 0;
+          } else {
+            const months = monthsPerYear[`${category}-${item}`] || itemData.monthsPerYear;
+            total += (itemData.monthlyKwh * months * Number(value));
+          }
         }
       });
     });
